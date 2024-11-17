@@ -1,0 +1,54 @@
+# created by virtualenv automatically
+*
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments (Windows)
+.venv/
+env/
+venv/
+env.bak/
+venv.bak/
+
+# PyCharm project files
+.idea/
+*.iml
+
+# Python-specific logs and cache files
+*.log
+*.sqlite3
+*.db
+*.bak
+*.swp
+*.swo
+*.tmp
+*.temp
+*.cache/
+*.pytest_cache/
+*.coverage
+.coverage.*
+
+# Environment variables (store sensitive data)
+.env
+*.env
+
+# Windows system files
+Thumbs.db
+desktop.ini
+
+# Build directories and distribution packages
+build/
+dist/
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+*.egg
+*.whl
+
+# Temporary files
+*.tmp
+*.bak
+*.swp

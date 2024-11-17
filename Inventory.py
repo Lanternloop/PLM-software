@@ -1,16 +1,21 @@
 class Collection:
-    def __init__(self, collection_id, season_name, products, production_status):
+    def __init__(self, collection_id, season_name, production_status):
         self.collection_id = collection_id
         self.season_name = season_name
-        self.products = products
+        self.products = []
         self.production_status = production_status
 
 
 
+
+
+
+
 class Product:
-    def __init__(self, product_id, materials, size, fit, material_certifications,
+    def __init__(self, product_id, name, materials, size, fit, material_certifications,
                  colors, processes, supplier, gender, season):
         self.product_id = product_id
+        self.name = name
         self.materials = materials
         self.size = size
         self.fit = fit
@@ -32,3 +37,10 @@ class Product:
         print(f"Supplier: {self.supplier}")
         print(f"Gender: {self.gender}")
         print(f"SEASON: {self.season}")
+
+
+
+
+
+
+
