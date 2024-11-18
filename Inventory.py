@@ -1,10 +1,13 @@
 class Collection:
+    """represents collection"""
     def __init__(self, collection_id, season_name, production_status):
         self.collection_id = collection_id
         self.season_name = season_name
         self.products = []
         self.production_status = production_status
 
+    """Shows products within a certain collection"""
+    def add_product(self)
 
 
 
@@ -12,6 +15,7 @@ class Collection:
 
 
 class Product:
+    """Defines attributes of what products consist of"""
     def __init__(self, product_id, name, materials, size, fit, material_certifications,
                  colors, processes, supplier, gender, season):
         self.product_id = product_id
@@ -26,8 +30,10 @@ class Product:
         self.gender = gender
         self.season = season
 
+    """Shows products products information"""
     def get_product_info(self):
         print(f"Product ID: {self.product_id}")
+        print(f"name: {self.name}")
         print(f"materials: {self.materials}")
         print(f"Size: {self.size}")
         print(f"Fit: {self.fit}")
