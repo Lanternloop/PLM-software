@@ -1,29 +1,39 @@
-from database import get_connection
+class Style:
+    """Een class om een kledingstuk te beschrijven"""
 
-class FashionCollections:
-    """Handles crud operations for collection table and product table"""
-    def __init(self, production = (":memory:")):
+    def __init__(self, style_id, style_name, product_type, textile, textile_certifications, size_range, sizes):
+        self.style_id = style_id
+        self.style_name = style_name
+        self.product_type = product_type
+        self.textile = textile
+        self.textile_certifications = textile_certifications
+        self.size_range = size_range
+        self.sizes = sizes
+        self.remarks = ""
+
+    def get_description_style(self):
+        """Toont een volledig beschrijf van kledingstuk"""
+        print(f"Style ID: style: {self.style_id}")
+        print(f"Style name: {self.style_name}")
+        print(f"Product type: {self.product_type}")
+        print(f"Textile: {self.textile}")
+        print(f"Textile certifications: {self.textile_certifications}")
+        print(f"Size range: {self.size_range}")
+        print(f"sizes: {self.sizes}")
+        print(f"Remarks: {self.remarks}")
 
 
 
 
 
 
-class Garments:
-    """Defines attributes of what products consist of"""
-    def __init__(self, product_id, name, materials, size, fit, material_certifications,
-                 colors, processes, supplier, gender, season):
-        self.product_id = product_id
-        self.name = name
-        self.materials = materials
-        self.size = size
-        self.fit = fit
-        self.materials_certifications = material_certifications
-        self.colors = colors
-        self.processes = processes
-        self.supplier = supplier
-        self.gender = gender
-        self.season = season
+
+
+clothing_piece = Style("PL100", "Storm Jacket", "Jacket", "recycled polyester",
+                       "RCS", "Mens garment", "S-XXL")
+clothing_piece.get_description_style()
+
+
 
 
 
