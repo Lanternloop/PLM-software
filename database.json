@@ -1,16 +1,26 @@
 [
     {
         "collection_id": 1,
-        "collection_name": "2024 Collection",
+        "collection_name": "Summer 2024 ",
         "styles": [
             {
                 "style_id": 101,
                 "style_name": "Nano Puff Jacket",
                 "product_type": "Jacket",
                 "textile": "Recycled Polyester",
-                "textile_certifications": ["Fair Trade", "Bluesign Approved"],
+                "textile_certifications": [
+                    "Fair Trade",
+                    "Bluesign Approved"
+                ],
                 "size_range": "XS-XXL",
-                "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+                "sizes": [
+                    "XS",
+                    "S",
+                    "M",
+                    "L",
+                    "XL",
+                    "XXL"
+                ],
                 "remarks": "Lightweight and packable for year-round use"
             },
             {
@@ -18,9 +28,19 @@
                 "style_name": "Ultralight Down Jacket",
                 "product_type": "Jacket",
                 "textile": "Recycled Nylon",
-                "textile_certifications": ["Fair Trade", "Bluesign Approved"],
+                "textile_certifications": [
+                    "Fair Trade",
+                    "Bluesign Approved"
+                ],
                 "size_range": "XS-XXL",
-                "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+                "sizes": [
+                    "XS",
+                    "S",
+                    "M",
+                    "L",
+                    "XL",
+                    "XXL"
+                ],
                 "remarks": "Perfect for unpredictable weather"
             },
             {
@@ -28,9 +48,18 @@
                 "style_name": "Performance Trail Pants",
                 "product_type": "Pants",
                 "textile": "Recycled Polyester",
-                "textile_certifications": ["Bluesign Approved"],
+                "textile_certifications": [
+                    "Bluesign Approved"
+                ],
                 "size_range": "28-38",
-                "sizes": ["28", "30", "32", "34", "36", "38"],
+                "sizes": [
+                    "28",
+                    "30",
+                    "32",
+                    "34",
+                    "36",
+                    "38"
+                ],
                 "remarks": "Moisture-wicking for outdoor adventures"
             },
             {
@@ -38,9 +67,18 @@
                 "style_name": "Climbing Canvas Pants",
                 "product_type": "Pants",
                 "textile": "Organic Cotton",
-                "textile_certifications": ["Fair Trade"],
+                "textile_certifications": [
+                    "Fair Trade"
+                ],
                 "size_range": "28-38",
-                "sizes": ["28", "30", "32", "34", "36", "38"],
+                "sizes": [
+                    "28",
+                    "30",
+                    "32",
+                    "34",
+                    "36",
+                    "38"
+                ],
                 "remarks": "Durable and flexible for climbing"
             },
             {
@@ -48,9 +86,17 @@
                 "style_name": "Organic Cotton Flannel Shirt",
                 "product_type": "Flannel",
                 "textile": "Organic Cotton",
-                "textile_certifications": ["Fair Trade"],
+                "textile_certifications": [
+                    "Fair Trade"
+                ],
                 "size_range": "S-XXL",
-                "sizes": ["S", "M", "L", "XL", "XXL"],
+                "sizes": [
+                    "S",
+                    "M",
+                    "L",
+                    "XL",
+                    "XXL"
+                ],
                 "remarks": "Lightweight and breathable"
             },
             {
@@ -58,9 +104,15 @@
                 "style_name": "Recycled Fleece Mittens",
                 "product_type": "Mittens",
                 "textile": "Recycled Fleece",
-                "textile_certifications": ["Bluesign Approved"],
+                "textile_certifications": [
+                    "Bluesign Approved"
+                ],
                 "size_range": "S-L",
-                "sizes": ["S", "M", "L"],
+                "sizes": [
+                    "S",
+                    "M",
+                    "L"
+                ],
                 "remarks": "Warm and lightweight"
             },
             {
@@ -68,87 +120,28 @@
                 "style_name": "Organic Cotton Workwear Overalls",
                 "product_type": "Overall",
                 "textile": "Organic Cotton Canvas",
-                "textile_certifications": ["Fair Trade"],
+                "textile_certifications": [
+                    "Fair Trade"
+                ],
                 "size_range": "S-XL",
-                "sizes": ["S", "M", "L", "XL"],
+                "sizes": [
+                    "S",
+                    "M",
+                    "L",
+                    "XL"
+                ],
                 "remarks": "Durable for tough environments"
             }
         ]
     },
     {
-        "collection_id": 2,
-        "collection_name": "2025 Collection",
-        "styles": [
-            {
-                "style_id": 201,
-                "style_name": "Hardshell Alpine Jacket",
-                "product_type": "Jacket",
-                "textile": "Recycled Nylon",
-                "textile_certifications": ["Fair Trade", "Bluesign Approved"],
-                "size_range": "XS-XXL",
-                "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
-                "remarks": "Waterproof and windproof for harsh weather"
-            },
-            {
-                "style_id": 202,
-                "style_name": "Insulated Powder Bowl Jacket",
-                "product_type": "Jacket",
-                "textile": "Recycled Polyester",
-                "textile_certifications": ["Bluesign Approved"],
-                "size_range": "XS-XXL",
-                "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
-                "remarks": "Designed for winter sports"
-            },
-            {
-                "style_id": 203,
-                "style_name": "Snow Trekking Pants",
-                "product_type": "Pants",
-                "textile": "Recycled Polyester",
-                "textile_certifications": ["Fair Trade"],
-                "size_range": "28-38",
-                "sizes": ["28", "30", "32", "34", "36", "38"],
-                "remarks": "Waterproof and insulated for cold weather"
-            },
-            {
-                "style_id": 204,
-                "style_name": "Heavyweight Canvas Work Pants",
-                "product_type": "Pants",
-                "textile": "Organic Cotton Canvas",
-                "textile_certifications": ["Fair Trade"],
-                "size_range": "28-38",
-                "sizes": ["28", "30", "32", "34", "36", "38"],
-                "remarks": "Built to last in rugged environments"
-            },
-            {
-                "style_id": 205,
-                "style_name": "Thick Organic Flannel Shirt",
-                "product_type": "Flannel",
-                "textile": "Organic Cotton",
-                "textile_certifications": ["Fair Trade"],
-                "size_range": "S-XXL",
-                "sizes": ["S", "M", "L", "XL", "XXL"],
-                "remarks": "Cozy and perfect for layering"
-            },
-            {
-                "style_id": 206,
-                "style_name": "Thermal Mittens",
-                "product_type": "Mittens",
-                "textile": "Recycled Fleece",
-                "textile_certifications": ["Bluesign Approved"],
-                "size_range": "S-L",
-                "sizes": ["S", "M", "L"],
-                "remarks": "Insulated for freezing conditions"
-            },
-            {
-                "style_id": 207,
-                "style_name": "Waterproof Workwear Overalls",
-                "product_type": "Overall",
-                "textile": "Recycled Canvas",
-                "textile_certifications": ["Fair Trade"],
-                "size_range": "S-XL",
-                "sizes": ["S", "M", "L", "XL"],
-                "remarks": "Designed for all-weather performance"
-            }
-        ]
+        "collections_id": 2,
+        "collection_name": "Summer 2025",
+        "styles": []
+    },
+    {
+        "collections_id": 3,
+        "collection_name": "Summer 2026",
+        "styles": []
     }
 ]
