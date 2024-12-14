@@ -1,6 +1,8 @@
 """PLM-applicatie GUI module"""
 import tkinter as tk
 from tkinter import ttk
+import csv
+from pathlib import Path
 
 
 root = tk.Tk()
@@ -69,11 +71,11 @@ button_size_range = ttk.Combobox(frame_clothing, values=choice_size_range)
 button_size_range.grid(column=2, row=5)
 
 
-#Label and button for size range.
-label_size_range = tk.Label(frame_clothing, text="Size range")
-label_size_range.grid(column=1, row=6)
-button_size_range = tk.Entry(frame_clothing)
-button_size_range.grid(column=2, row=6)
+#Label and button for sizes.
+label_sizes = tk.Label(frame_clothing, text="Sizes")
+label_sizes.grid(column=1, row=6)
+button_sizes = tk.Entry(frame_clothing)
+button_sizes.grid(column=2, row=6)
 
 
 #Save button and clear filled record button
@@ -83,10 +85,7 @@ clear_fields = tk.Button(frame_clothing, text="CLEAR")
 clear_fields.grid(column=2, row=10)
 
 
-#columns for treeview and shows second heading index 1, with delete button.
-columns = ()
-tree = ttk.Treeview(root, columns=columns, show="headings")
-tree.grid(columns=5, row=15)
+#Delete button.
 delete_record_csv = tk.Button(root, text="DELETE")
 delete_record_csv.grid(column=2, row=10)
 
