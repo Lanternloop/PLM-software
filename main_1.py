@@ -15,7 +15,20 @@ def dataframe_fashion_collection():
 
 #Check als file bestaat en voegt nieuwe style toe aan csv file.
 #Anders maakt het een nieuwe csv file en schrijft deze style erin.
-def add_style(style_id, style_name, product_type, textiles, size_range, sizes, remarks):
+def add_style(style_name, product_type, textiles, size_range, sizes, remarks):
+    # Unique style id.
+    unique_id = 0
+
+    if os.path.exists(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv"):
+        with open (r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r') as dict_file:
+            reader = csv.DictReader(dict_file)
+            rows = list(reader)
+            if rows:
+                last_row = rows[-1]
+                unique_id = int(last_row['Style ID']) + 1
+            else:
+                unique_id += 1
+
     try:
         with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='a', newline='') as dict_file:
             fieldnames = ['Style ID', 'Style name', 'Product type', 'Textiles', 'Size range', 'Sizes', 'Remarks']
@@ -23,7 +36,7 @@ def add_style(style_id, style_name, product_type, textiles, size_range, sizes, r
 
             #Schrijft row in csv file
             writer.writerow(
-                {'Style ID': style_id,
+                {'Style ID': unique_id,
                  'Style name': style_name,
                  'Product type': product_type,
                  'Textiles': textiles,
@@ -33,13 +46,13 @@ def add_style(style_id, style_name, product_type, textiles, size_range, sizes, r
             )
 
     except FileNotFoundError:
-        with open(new_file, mode='a', newline='') as file:
+        with open(new_file, mode='w', newline='') as file:
             fieldnames = ['Style ID', 'Style name', 'Product type', 'Textiles', 'Size range', 'Sizes', 'Remarks']
             writer = csv.DictWriter(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, fieldnames=fieldnames)
 
             writer.writeheader()
             writer.writerow(
-                {'Style ID': style_id,
+                {'Style ID': unique_id + 1,
                  'Style name': style_name,
                  'Product type': product_type,
                  'Textiles': textiles,
@@ -47,6 +60,7 @@ def add_style(style_id, style_name, product_type, textiles, size_range, sizes, r
                  'Sizes': sizes,
                  'Remarks': remarks}
             )
+
 
 #Verwijdert style van csv file.
 def remove_style():
@@ -106,10 +120,6 @@ def get_full_collection():
 #
 #     except IndexError:
 #         print(f"style not found!!!")
-
-
-get_full_collection()
-
 
 
 
