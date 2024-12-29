@@ -6,7 +6,7 @@ import pandas
 
 
 #Nieuwe file naam dat gebruikt wordt als file niet bestaat.
-file_path = "data_base_fashion_collection.csv"
+new_file = "data_base_fashion_collection.csv"
 
 #data frame view with pandas using the fashion collections column csv file.
 def dataframe_fashion_collection():
@@ -33,9 +33,9 @@ def add_style(style_id, style_name, product_type, textiles, size_range, sizes, r
             )
 
     except FileNotFoundError:
-        with open(file_path, mode='a', newline='') as new_file:
+        with open(new_file, mode='a', newline='') as file:
             fieldnames = ['Style ID', 'Style name', 'Product type', 'Textiles', 'Size range', 'Sizes', 'Remarks']
-            writer = csv.DictWriter(new_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, fieldnames=fieldnames)
+            writer = csv.DictWriter(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL, fieldnames=fieldnames)
 
             writer.writeheader()
             writer.writerow(
@@ -58,6 +58,7 @@ def remove_style():
             copy_contents_file = contents_file
 
 def get_style_ids():
+    """Voegt style toe aan collectie."""
     style_ids = []
     try:
         with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r', newline='') as dict_file:
@@ -70,14 +71,15 @@ def get_style_ids():
     return style_ids
 
 def delete_style(style_id_to_delete):
+    """Verwijdert gekozen style van collectie."""
     rows = []
     deleted = False
     with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r', newline='', encoding='utf-8') as dict_file:
         reader = csv.DictReader(dict_file)
         fieldnames = reader.fieldnames
-        for row in reader:
-            if row['Style ID'] != style_id_to_delete:
-                rows.append(row)
+        for style in reader:
+            if style['Style ID'] != style_id_to_delete:
+                rows.append(style)
             else:
                 deleted = True
 
@@ -89,12 +91,28 @@ def delete_style(style_id_to_delete):
 
     return deleted
 
-def get_collection():
-    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r', encoding='utf-8-sig') as dict_file:
+def get_full_collection():
+    """Leest volledige collectie en return als list."""
+    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r', encoding='utf-8') as dict_file:
         csv_reader = csv.DictReader(dict_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 
-        for row in csv_reader:
-            print(row)
+        collection_as_list = list(csv_reader)
+        return collection_as_list
+
+# def get_style(index):
+#     """Return individuele style van collection."""
+#     try:
+#         return get_full_collection()[index]
+#
+#     except IndexError:
+#         print(f"style not found!!!")
+
+
+get_full_collection()
+
+
+
+
 
 
 
