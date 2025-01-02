@@ -9,7 +9,8 @@ def get_full_collection():
     if not os.path.exists(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv"):
         return []
 
-    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r', newline='', encoding='utf-8') as dict_file:
+    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r', newline='',
+              encoding='utf-8') as dict_file:
         reader = csv.DictReader(dict_file)
         return list(reader)
 
@@ -18,7 +19,8 @@ def add_style(style_id, style_name, product_type, textiles, size_range, sizes, r
     """Voegt een nieuwe stijl toe aan de CSV-bestand."""
     file_exists = os.path.exists(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv")  # Controleert of het bestand bestaat
 
-    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='a', newline='', encoding='utf-8') as dict_file:
+    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='a', newline='',
+              encoding='utf-8') as dict_file:
         fieldnames = ['Style ID', 'Style name', 'Product type', 'Textiles', 'Size range', 'Sizes', 'Remarks']
         writer = csv.DictWriter(dict_file, fieldnames=fieldnames)
 
@@ -40,15 +42,13 @@ def add_style(style_id, style_name, product_type, textiles, size_range, sizes, r
 # Verwijdert een stijl uit de CSV-bestand
 def delete_style(style_id_to_delete):
     """Verwijdert een stijl uit de CSV-bestand op basis van het ID."""
-    if not os.path.exists(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv"):
-        return False
-
-    # Lees alle rijen uit het bestand
-    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r', newline='', encoding='utf-8') as dict_file:
+    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r', newline='',
+              encoding='utf-8') as dict_file:
         rows = list(csv.DictReader(dict_file))
 
     # Schrijf alle rijen behalve degene die verwijderd moet worden
-    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='w', newline='', encoding='utf-8') as dict_file:
+    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='w', newline='',
+              encoding='utf-8') as dict_file:
         fieldnames = ['Style ID', 'Style name', 'Product type', 'Textiles', 'Size range', 'Sizes', 'Remarks']
         writer = csv.DictWriter(dict_file, fieldnames=fieldnames)
         writer.writeheader()
@@ -59,7 +59,18 @@ def delete_style(style_id_to_delete):
 
     return True
 
+def update_style(style_to_update):
+    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r', newline='',
+              encoding='utf-8') as dict_file:
+        rows = list(csv.DictReader(dict_file))
 
+    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='w', newline='',
+              encoding='utf-8') as dict_file:
+        fieldnames = ['Style ID', 'Style name', 'Product type', 'Textiles', 'Size range', 'Sizes', 'Remarks']
+        writer = csv.DictWriter(dict_file, fieldnames=fieldnames)
+        writer.writeheader()
 
-
+        for row in rows:
+            if row['Style ID'] != style_to_update:
+                writer.writerow(style_to_update)
 
