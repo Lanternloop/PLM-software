@@ -1,8 +1,12 @@
 """PLM-applicatie GUI module"""
+#Importeerd tkinter
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
-from main_1 import add_style, get_full_collection, delete_style
+
+# Importeerd functies en class van main_1 module
+from main_1 import get_full_collection
+from main_1 import ManageStyle
 
 root = tk.Tk()
 root.title("PLM-application")
@@ -114,22 +118,22 @@ def save_data():
 
     tree.item(new_iid, values=(new_iid, style_name, product_type, textiles, size_range, sizes, remarks))
 
+    style = ManageStyle(
+        style_id=new_iid,
+        style_name=style_name,
+        product_type=product_type,
+        textiles=textiles,
+        size_range=size_range,
+        sizes=sizes,
+        remarks=remarks
+    )
     # Voeg de nieuwe stijl toe aan het CSV-bestand
     try:
-        add_style(
-            new_iid,
-            style_name,
-            product_type,
-            textiles,
-            size_range,
-            sizes,
-            remarks
-        )
+        style.add_style()
         messagebox.showinfo("Success", f"Style with ID {new_iid} added!")
+        clear_fields()
     except Exception as e:
         messagebox.showerror("Error", f"Could not save style: {e}")
-
-    clear_fields()
 
 def delete_data():
     selected_item = tree.selection()
@@ -144,8 +148,11 @@ def delete_data():
 
     # Verwijder de stijl uit het CSV-bestand en de Treeview
     try:
-        delete_style(iid_to_delete)
-        messagebox.showinfo("Success", f"Style with ID {iid_to_delete} deleted!")
+        deleted = ManageStyle.delete_style(iid_to_delete)  # Gebruik de statische methode
+        if deleted:
+            messagebox.showinfo("Success", f"Style with ID {iid_to_delete} deleted!")
+        else:
+            messagebox.showwarning("Warning", "No file found. Nothing to delete.")
     except Exception as e:
         messagebox.showerror("Error", f"Could not delete style: {e}")
 
