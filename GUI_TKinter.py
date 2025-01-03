@@ -11,7 +11,7 @@ from main_1 import ManageStyle
 root = tk.Tk()
 root.title("PLM-application")
 root.columnconfigure(0, weight=1)
-root.geometry("750x750")
+root.geometry("700x700")
 
 # Treeview widget voor het laten zien van toegevoegde styles
 tree_frame = ttk.Frame(root)
@@ -32,25 +32,24 @@ tree.heading("Product Type", text="Product Type", anchor="center")
 
 # Text variabel aan label en label frame dynamisch tekst verandering van titel voor style inputs
 text_frame_1 = tk.StringVar(value="Custom settings")
-text_var = ttk.Label(tree_frame, textvariable=text_frame_1, font=("arial", 11, "bold"))
-frame_style_input = tk.LabelFrame(tree_frame, labelwidget=text_var)
+text_var = ttk.Label(input_frame, textvariable=text_frame_1, font=("arial", 11, "bold"))
+frame_style_input = tk.LabelFrame(input_frame, labelwidget=text_var)
 frame_style_input.grid(row=1, column=0, columnspan=3, sticky=(tk.E + tk.W), padx=10, pady=10)
 frame_style_input.columnconfigure(1, weight=1)
 text_frame_1.set("Add new style")
 
-#Text variabel aan label en label frame dynamisch tekst verandering van titel van delete style
 text_frame_2 = tk.StringVar(value="Custom settings")
-text_var = ttk.Label(frame_style_input, textvariable=text_frame_2, font=("arial", 11, "bold"))
-delete_choice= tk.LabelFrame(frame_style_input, labelwidget=text_var)
-delete_choice.grid(row=7, column=0, columnspan=3, sticky=(tk.E + tk.W), padx=10, pady=10)
-delete_choice.columnconfigure(1, weight=1)
-text_frame_2.set("Delete style")
+text_var = ttk.Label(tree_frame, textvariable=text_frame_2, font=("arial", 11, "bold"))
+collection= tk.LabelFrame(tree_frame, labelwidget=text_var)
+collection.grid(row=7, column=0, columnspan=3, sticky=(tk.E + tk.W), padx=10, pady=10)
+collection.columnconfigure(1, weight=1)
+text_frame_2.set("Collection")
 
 #Label en Entries
 label_style_name = tk.Label(frame_style_input, text="Style name")
 label_style_name.grid(column=0, row=0, padx=10, pady=5, sticky=tk.W)
-entry_style_name = tk.Entry(frame_style_input)
-entry_style_name.grid(column=1, row=0, padx=10, pady=5, sticky="ew")
+button_style_name = tk.Entry(frame_style_input)
+button_style_name.grid(column=1, row=0, padx=10, pady=5, sticky="ew")
 
 choice_product_type = ("Jackets", "Shirts", "Pants", "Shorts", "Sweaters", "Vests")
 label_product_type = tk.Label(frame_style_input, text="Product type")
@@ -93,7 +92,8 @@ button_remarks = tk.Text(frame_style_input, width=30, height=5)
 button_remarks.grid(column=1, row=5, padx=10, pady=5, sticky="ew")
 
 def clear_fields():
-    entry_style_name.delete(0, tk.END)
+    """Verwijdert alle data in de input velden."""
+    button_style_name.delete(0, tk.END)
     button_product_type.set('')
     button_textiles.set('')
     button_size_range.set('')
@@ -101,7 +101,8 @@ def clear_fields():
     button_remarks.delete("1.0", tk.END)
 
 def save_data():
-    style_name = entry_style_name.get().strip()
+    """Opslaan van style in CSV bestand."""
+    style_name = button_style_name.get().strip()
     product_type = button_product_type.get().strip()
     textiles = button_textiles.get().strip()
     size_range = button_size_range.get().strip()
@@ -136,6 +137,7 @@ def save_data():
         messagebox.showerror("Error", f"Could not save style: {e}")
 
 def delete_data():
+    """Verwijdert gekozen style vanuit de treeview met het delete button."""
     selected_item = tree.selection()
 
     # Controleer of een stijl is geselecteerd
@@ -157,6 +159,7 @@ def delete_data():
         messagebox.showerror("Error", f"Could not delete style: {e}")
 
 def load_data_into_treeview():
+    """Laad data dynamisch in treeview tijdens de run van de applicatie."""
     # Verwijder bestaande items in de Treeview
     for item in tree.get_children():
         tree.delete(item)
@@ -170,12 +173,11 @@ def load_data_into_treeview():
         messagebox.showerror("Error", f"Error loading data: {e}")
 
 def view_full_collection():
-    # Creert nieuw pop-up window
+    """Maakt een pop-up window met de volledige collectie en al zijn fieldnames met bijhorende data."""
     collection_window = tk.Toplevel(root)
     collection_window.title("Full Collection")
     collection_window.geometry("1800x400")
 
-    # Voegt treeview widget om collectie te laten zien
     full_tree = ttk.Treeview(collection_window, columns=(
     "Style ID", "Style Name", "Product Type", "Textiles", "Size Range", "Sizes", "Remarks"), show="headings")
     full_tree.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
@@ -188,7 +190,6 @@ def view_full_collection():
     full_tree.heading("Sizes", text="Sizes", anchor="center")
     full_tree.heading("Remarks", text="Remarks", anchor="center")
 
-    # Load the data from the CSV file
     try:
         styles = get_full_collection()
         for style in styles:
@@ -203,15 +204,15 @@ save_to_csv = tk.Button(frame_style_input, text="SAVE", command=save_data)
 save_to_csv.grid(column=0, row=6, padx=10, pady=10, sticky=tk.W)
 
 # Delete button
-delete_record_csv = tk.Button(frame_style_input, text="DELETE", command=delete_data)
+delete_record_csv = tk.Button(tree_frame, text="DELETE", command=delete_data)
 delete_record_csv.grid(column=1, row=6, padx=10, pady=10, sticky=tk.E)
 
 # View full collection button
-view_full_button = tk.Button(frame_style_input, text="VIEW", command=view_full_collection, width=8)
-view_full_button.grid(column=0, row=8, columnspan=3, pady=5, padx=5, sticky=tk.W)
-
+view_full_button = tk.Button(tree_frame, text="VIEW", command=view_full_collection, width=8)
+view_full_button.grid(column=0, row=6, columnspan=3, pady=5, padx=5, sticky=tk.W)
 
 load_data_into_treeview()
+
 
 root.mainloop()
 
