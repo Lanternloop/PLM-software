@@ -1,7 +1,8 @@
-"""Main code voor crud functionaliteiten functies."""
+"""Main code voor crud functionaliteiten logica."""
 import os
 import csv
 
+file_path = "Fashion_Collection_1.csv"
 
 class ManageStyle:
     """Class voor crud functionaliteiten voor stylen in collectie."""
@@ -16,12 +17,11 @@ class ManageStyle:
         self.sizes = sizes
         self.remarks = remarks
 
-
     def add_style(self):
         """Voegt een nieuwe stijl toe aan het CSV bestand."""
-        file_exists = os.path.exists(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv")  # Controleert of het bestand bestaat
+        file_exists = os.path.exists(file_path)  # Controleert of het bestand bestaat
 
-        with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='a', newline='',
+        with open("Fashion_Collection.csv", mode='a', newline='',
                     encoding='utf-8') as dict_file:
             fieldnames = ['Style ID', 'Style name', 'Product type', 'Textiles', 'Size range', 'Sizes', 'Remarks']
             writer = csv.DictWriter(dict_file, fieldnames=fieldnames)
@@ -41,16 +41,15 @@ class ManageStyle:
                 'Remarks': self.remarks
             })
 
-
     @staticmethod
     def delete_style(style_id_to_delete):
         """Verwijdert een stijl uit het CSV bestand op basis van het ID."""
-        with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r', newline='',
+        with open(file_path, mode='r', newline='',
                     encoding='utf-8') as dict_file:
             rows = list(csv.DictReader(dict_file))
 
         # Schrijf alle rijen behalve degene die verwijderd moet worden
-        with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='w', newline='',
+        with open(file_path, mode='w', newline='',
                     encoding='utf-8') as dict_file:
             fieldnames = ['Style ID', 'Style name', 'Product type', 'Textiles', 'Size range', 'Sizes', 'Remarks']
             writer = csv.DictWriter(dict_file, fieldnames=fieldnames)
@@ -62,12 +61,13 @@ class ManageStyle:
 
         return True
 
+
 def get_full_collection():
-    """Leest de volledige collectie van het CSV bestand."""
-    if not os.path.exists(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv"):
+    """Leest de volledige collectie van het CSV bestand en return een list."""
+    if not os.path.exists(file_path):
         return []
 
-    with open(r"C:\Users\Zeph\Desktop\Programming basics\Fashion_Collection_Proper_Columns.csv", mode='r', newline='',
+    with open(file_path, mode='r', newline='',
               encoding='utf-8') as dict_file:
         reader = csv.DictReader(dict_file)
         return list(reader)

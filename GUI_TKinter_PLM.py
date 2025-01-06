@@ -138,7 +138,7 @@ input_frame.grid(column=0, row=1, columnspan=2, sticky="ew", padx=10, pady=10)
 # Treeview widget voor het laten zien van toegevoegde styles
 tree_frame = ttk.Frame(root)
 tree_frame.grid(column=0, row=0, columnspan=2, sticky="nsew", padx=10, pady=10)
-root.rowconfigure(2, weight=3)
+root.rowconfigure(0, weight=3)
 root.columnconfigure(0, weight=1)
 
 tree = ttk.Treeview(tree_frame, columns=("Style ID", "Style Name", "Product Type"), show="headings")
@@ -156,13 +156,6 @@ frame_style_input = tk.LabelFrame(input_frame, labelwidget=text_var)
 frame_style_input.grid(column=0, row=1, columnspan=3, sticky=(tk.E + tk.W), padx=10, pady=10)
 frame_style_input.columnconfigure(1, weight=1)
 text_frame_1.set("Add new style")
-
-text_frame_2 = tk.StringVar(value="Custom settings")
-text_var = ttk.Label(tree_frame, textvariable=text_frame_2, font=("arial", 11, "bold"))
-collection= tk.LabelFrame(tree_frame, labelwidget=text_var)
-collection.grid(column=0, row=7, columnspan=3, sticky=(tk.E + tk.W), padx=10, pady=10)
-collection.columnconfigure(1, weight=1)
-text_frame_2.set("Collection")
 
 # Style name button, Entry widget
 label_style_name = tk.Label(frame_style_input, text="Style name")
@@ -187,9 +180,9 @@ choice_textiles = (
     "WOOL+PLA", "Soy Silk Fiber)"
     )
 label_textiles = tk.Label(frame_style_input, text="Textile(s)")
-label_textiles.grid(column=0, row=2, padx=10, pady=5, sticky=tk.W)
+label_textiles.grid(column=0, row=4, padx=10, pady=5, sticky=tk.W)
 button_textiles = tk.Listbox(frame_style_input, selectmode=tk.MULTIPLE, height=8)
-button_textiles.grid(column=1, row=2, padx=10, pady=5, sticky="ew")
+button_textiles.grid(column=1, row=4, padx=10, pady=5, sticky="ew")
 for textile in choice_textiles:
     button_textiles.insert(tk.END, textile)
 
@@ -207,9 +200,9 @@ choice_size = ("XXS, XS, S, M, L, XL, XXL",
                "26, 28, 30, 32, 34, 36, 38"
                )
 label_sizes = tk.Label(frame_style_input, text="Sizes")
-label_sizes.grid(column=0, row=4, padx=10, pady=5, sticky=tk.W)
+label_sizes.grid(column=0, row=2, padx=10, pady=5, sticky=tk.W)
 button_sizes = ttk.Combobox(frame_style_input, values=choice_size)
-button_sizes.grid(column=1, row=4, padx=10, pady=5, sticky="ew")
+button_sizes.grid(column=1, row=2, padx=10, pady=5, sticky="ew")
 
 # Remarks button, text widget
 label_remarks = tk.Label(frame_style_input, text="Remarks")
@@ -219,7 +212,7 @@ button_remarks.grid(column=1, row=5, padx=10, pady=5, sticky="ew")
 
 # Save button in frame_style_input
 save_to_csv = tk.Button(frame_style_input, text="SAVE", command=save_data)
-save_to_csv.grid(column=0, row=6, padx=10, pady=10, sticky=tk.W)
+save_to_csv.grid(column=1, row=6, padx=10, pady=10, sticky=tk.W)
 
 # Delete button in tree_frame
 delete_record_csv = tk.Button(tree_frame, text="DELETE", command=delete_data)
