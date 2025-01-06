@@ -2,7 +2,7 @@
 import os
 import csv
 
-file_path = "Fashion_Collection_1.csv"
+file_path = os.path.abspath("Season_1.csv")
 
 class ManageStyle:
     """Class voor crud functionaliteiten voor stylen in collectie."""
@@ -21,7 +21,7 @@ class ManageStyle:
         """Voegt een nieuwe stijl toe aan het CSV bestand."""
         file_exists = os.path.exists(file_path)  # Controleert of het bestand bestaat
 
-        with open("Fashion_Collection.csv", mode='a', newline='',
+        with open(file_path, mode='a', newline='',
                     encoding='utf-8') as dict_file:
             fieldnames = ['Style ID', 'Style name', 'Product type', 'Textiles', 'Size range', 'Sizes', 'Remarks']
             writer = csv.DictWriter(dict_file, fieldnames=fieldnames)
