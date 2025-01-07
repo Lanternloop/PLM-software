@@ -110,7 +110,7 @@ def view_full_collection():
 
 def load_data_into_treeview():
     """Laad data dynamisch in treeview tijdens de run van de applicatie."""
-    # Verwijder oude of dubbele info uit de treeview
+    # Verwijder oude of dubbele info uit de treeview tijdens run time
     for item in tree.get_children():
         tree.delete(item)
 
