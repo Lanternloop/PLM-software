@@ -18,12 +18,12 @@ class ManageStyle:
         self.size_range = size_range
         self.sizes = sizes
         self.remarks = remarks
-        
+
     @staticmethod
     def load_deleted_ids():
         """Laad verwijderde style ids van de file, file_path_deleted_ids"""
         if os.path.exists(file_path_deleted_ids):
-            with open(file_path_deleted_ids, mode="r", newline='', encoding='utf-8') as delete_id:
+            with open(file_path_deleted_ids, mode="r", encoding='utf-8') as delete_id:
                 for ids in delete_id:
                     ManageStyle.deleted_ids.append(int(ids.strip()))
 
@@ -87,7 +87,8 @@ class ManageStyle:
                     deleted = True
                     ManageStyle.deleted_ids.append(int(row['Style ID']))
 
-                    with open("deleted_ids.txt")
+                    with open(file_path_deleted_ids, mode="a", newline='', encoding='utf-8') as deleted_file:
+                        deleted_file.write(f"{row['Style ID']}\n")
                 else:
                     writer.writerow(row)
 
