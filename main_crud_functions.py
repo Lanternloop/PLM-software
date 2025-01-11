@@ -25,19 +25,24 @@ class ManageStyle:
         if os.path.exists(file_path_deleted_ids):
             with open(file_path_deleted_ids, mode="r", encoding='utf-8') as delete_id:
                 for ids in delete_id:
-                    ManageStyle.deleted_ids.append(int(ids.strip()))
+                    stripped_ids = ids.strip()
+                    if stripped_ids:
+                        try:
+                            ManageStyle.deleted_ids.append(int(stripped_ids))
+                        except ValueError:
+                            pass
 
     @staticmethod
     def get_next_id():
         """Bepaalt de volgende beschikbare style ID"""
         styles = get_full_collection()
 
-        active_ids = set()
+        active_ids = []
         if styles:
             for style in styles:
-                active_ids.add(int(style['Style ID']))
+                active_ids.append(int(style['Style ID']))
 
-        all_ids = set(active_ids).union(set(ManageStyle.deleted_ids))
+        all_ids = active_ids + ManageStyle.deleted_ids
 
         highest_id = 0
         for ids in all_ids:
@@ -87,7 +92,7 @@ class ManageStyle:
                     deleted = True
                     ManageStyle.deleted_ids.append(int(row['Style ID']))
 
-                    with open(file_path_deleted_ids, mode="a", newline='', encoding='utf-8') as deleted_file:
+                    with open(file_path_deleted_ids, mode="a", encoding='utf-8') as deleted_file:
                         deleted_file.write(f"{row['Style ID']}\n")
                 else:
                     writer.writerow(row)
