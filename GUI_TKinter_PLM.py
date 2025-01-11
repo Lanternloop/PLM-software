@@ -25,6 +25,7 @@ def clear_fields():
 
 def save_data():
     """Opslaan van style in CSV bestand en treeview met uniek ID."""
+    style_id = ManageStyle.get_next_id()
     style_name = button_style_name.get().strip()
     product_type = button_product_type.get().strip()
     textiles = get_selected_textiles()
@@ -37,12 +38,8 @@ def save_data():
         messagebox.showinfo("Error","Please fill in all the input fields!")
         return
 
-    # Genereer uniek id en voegt het toe in de treeview
-    new_iid = tree.insert("", tk.END, values=("", style_name, product_type, textiles, size_range, sizes, remarks))
-    tree.item(new_iid, values=(new_iid, style_name, product_type, textiles, size_range, sizes, remarks))
-
     style = ManageStyle(
-        style_id=new_iid,
+        style_id=style_id,
         style_name=style_name,
         product_type=product_type,
         textiles=textiles,
@@ -51,13 +48,15 @@ def save_data():
         remarks=remarks
     )
 
-    # Voeg de nieuwe stijl toe aan het CSV-bestand
     try:
         style.add_style()
-        messagebox.showinfo("Success", f"Style with ID {new_iid} added!")
+        messagebox.showinfo("Success", f"Style with ID {style_id} added!")
         clear_fields()
     except Exception as e:
         messagebox.showerror("Error", f"Could not save style: {e}")
+
+    # Voegt nieuwe style toe aan treeview
+    tree.insert("", tk.END, values=(style_id, style_name, product_type, textiles, size_range, sizes, remarks))
 
 def delete_data():
     """Verwijdert gekozen style van CSV bestand en treeview."""
@@ -69,13 +68,14 @@ def delete_data():
         return
 
     iid_to_delete = selected_item[0]
+    style_id_to_delete = tree.item(iid_to_delete)['values'][0]
     tree.delete(iid_to_delete)
 
     # Verwijder de stijl uit het CSV-bestand en de Treeview
     try:
-        deleted = ManageStyle.delete_style(iid_to_delete)  # Gebruik de statische methode
+        deleted = ManageStyle.delete_style(style_id_to_delete)  
         if deleted:
-            messagebox.showinfo("Success", f"Style with ID {iid_to_delete} deleted!")
+            messagebox.showinfo("Success", f"Style with ID {style_id_to_delete} deleted!")
         else:
             messagebox.showwarning("Warning", "No file found. Nothing to delete.")
     except Exception as e:
@@ -118,7 +118,8 @@ def load_data_into_treeview():
     try:
         styles = get_full_collection()
         for style in styles:
-            tree.insert("", tk.END, iid=style['Style ID'], values=(style['Style ID'], style['Style name'], style['Product type']))
+            tree.insert("",tk.END, values=(style['Style ID'], style['Style name'], style['Product type'],
+                                           style['Textiles'], style['Size range'], style['Sizes'], style['Remarks']))
     except Exception as e:
         messagebox.showerror("Error", f"Error loading data: {e}")
 
@@ -126,8 +127,8 @@ def get_selected_textiles():
     selected_indices = button_textiles.curselection()
     selected_textiles = []
 
-    for i in selected_indices:
-        selected_textiles.append(button_textiles.get(i))
+    for index in selected_indices:
+        selected_textiles.append(button_textiles.get(index))
 
     return ", ".join(selected_textiles)
 
@@ -196,8 +197,8 @@ button_size_range.grid(column=1, row=3, padx=10, pady=5, sticky="ew")
 # Sizes button, Combobox widget met list maten
 choice_size = ("XXS, XS, S, M, L, XL, XXL",
                "XS, S, M, L, XL, XXL",
-               "28, 30, 32, 34, 36, 38",
-               "26, 28, 30, 32, 34, 36, 38"
+               "26, 28, 30, 32, 34, 36, 38",
+               "28, 30, 32, 34, 36, 38"
                )
 label_sizes = tk.Label(frame_style_input, text="Sizes")
 label_sizes.grid(column=0, row=2, padx=10, pady=5, sticky=tk.W)
@@ -224,6 +225,7 @@ view_full_button.grid(column=1, row=1, columnspan=3, pady=5, padx=5, sticky=tk.W
 
 
 load_data_into_treeview()
+
 root.mainloop()
 
 

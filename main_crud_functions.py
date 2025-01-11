@@ -36,8 +36,7 @@ class ManageStyle:
         """Voegt een nieuwe stijl toe aan het CSV bestand."""
         file_exists = os.path.exists(file_path)  # Controleert of het bestand bestaat
 
-        with open(file_path, mode='a', newline='',
-                    encoding='utf-8') as dict_file:
+        with open(file_path, mode='a', newline='', encoding='utf-8') as dict_file:
             fieldnames = ['Style ID', 'Style name', 'Product type', 'Textiles', 'Size range', 'Sizes', 'Remarks']
             writer = csv.DictWriter(dict_file, fieldnames=fieldnames)
 
@@ -59,22 +58,23 @@ class ManageStyle:
     @staticmethod
     def delete_style(style_id_to_delete):
         """Verwijdert een stijl uit het CSV bestand op basis van het ID."""
-        with open(file_path, mode='r', newline='',
-                    encoding='utf-8') as dict_file:
+        with open(file_path, mode='r', newline='', encoding='utf-8') as dict_file:
             rows = list(csv.DictReader(dict_file))
 
         # Schrijf alle rijen behalve degene die verwijderd moet worden
-        with open(file_path, mode='w', newline='',
-                    encoding='utf-8') as dict_file:
+        with open(file_path, mode='w', newline='', encoding='utf-8') as dict_file:
             fieldnames = ['Style ID', 'Style name', 'Product type', 'Textiles', 'Size range', 'Sizes', 'Remarks']
             writer = csv.DictWriter(dict_file, fieldnames=fieldnames)
             writer.writeheader()
 
+            deleted = False
             for row in rows:
-                if row['Style ID'] != style_id_to_delete:
-                    writer.writerow(row)
+                if row['Style ID'] == str(style_id_to_delete):
+                    deleted = True
+                    continue
+                writer.writerow(row)
 
-        return True
+        return deleted
 
 
 def get_full_collection():
@@ -82,8 +82,7 @@ def get_full_collection():
     if not os.path.exists(file_path):
         return []
 
-    with open(file_path, mode='r', newline='',
-              encoding='utf-8') as dict_file:
+    with open(file_path, mode='r', newline='', encoding='utf-8') as dict_file:
         reader = csv.DictReader(dict_file)
         return list(reader)
 
