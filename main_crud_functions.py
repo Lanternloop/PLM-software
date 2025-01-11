@@ -76,8 +76,9 @@ class ManageStyle:
             for row in rows:
                 if row['Style ID'] == str(style_id_to_delete):
                     deleted = True
-                    continue
-                writer.writerow(row)
+                    ManageStyle.deleted_ids.append(int(row['Style ID']))
+                else:
+                    writer.writerow(row)
 
         return deleted
 
