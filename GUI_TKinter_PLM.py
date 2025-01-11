@@ -223,7 +223,7 @@ delete_record_csv.grid(column=0, row=1, padx=10, pady=10, sticky=tk.E)
 view_full_button = tk.Button(tree_frame, text="VIEW", command=view_full_collection, width=8)
 view_full_button.grid(column=1, row=1, columnspan=3, pady=5, padx=5, sticky=tk.W)
 
-
+ManageStyle.load_deleted_ids()
 load_data_into_treeview()
 
 root.mainloop()
