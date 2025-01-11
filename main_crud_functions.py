@@ -6,7 +6,8 @@ file_path = os.path.abspath("Season_1.csv")
 
 class ManageStyle:
     """Class voor crud functionaliteiten voor stylen in collectie."""
-
+    # Houdt de verwijderde id's vast
+    deleted_ids = []
     def __init__(self, style_id, style_name, product_type, textiles, size_range, sizes, remarks):
         """Creert attributen die gebruikt zal worden voor het toevoegen van een style in het CSV bestand."""
         self.style_id = style_id
@@ -21,16 +22,20 @@ class ManageStyle:
     def get_next_id():
         """Bepaalt de volgende beschikbare style ID"""
         styles = get_full_collection()
-        last_id = 0
 
+        active_ids = set()
         if styles:
-            # Kijkt wat de volgende beschikbare Style ID is
             for style in styles:
-                style_id = int(style['Style ID'])
-                if style_id > last_id:
-                    last_id = style_id
+                active_ids.add(int(style['Style ID']))
 
-        return str(last_id + 1)
+        all_ids = set(active_ids).union(set(ManageStyle.deleted_ids))
+
+        highest_id = 0
+        for ids in all_ids:
+            if ids > highest_id:
+                highest_id = ids
+
+        return str(highest_id + 1)
 
     def add_style(self):
         """Voegt een nieuwe stijl toe aan het CSV bestand."""

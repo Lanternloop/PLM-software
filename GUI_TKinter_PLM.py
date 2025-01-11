@@ -73,7 +73,7 @@ def delete_data():
 
     # Verwijder de stijl uit het CSV-bestand en de Treeview
     try:
-        deleted = ManageStyle.delete_style(style_id_to_delete)  
+        deleted = ManageStyle.delete_style(style_id_to_delete)
         if deleted:
             messagebox.showinfo("Success", f"Style with ID {style_id_to_delete} deleted!")
         else:
