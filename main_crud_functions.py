@@ -3,6 +3,7 @@ import os
 import csv
 
 file_path = os.path.abspath("Season_1.csv")
+file_path_deleted_ids = os.path.abspath("deleted_ids.txt")
 
 class ManageStyle:
     """Class voor crud functionaliteiten voor stylen in collectie."""
@@ -17,6 +18,14 @@ class ManageStyle:
         self.size_range = size_range
         self.sizes = sizes
         self.remarks = remarks
+        
+    @staticmethod
+    def load_deleted_ids():
+        """Laad verwijderde style ids van de file, file_path_deleted_ids"""
+        if os.path.exists(file_path_deleted_ids):
+            with open(file_path_deleted_ids, mode="r", newline='', encoding='utf-8') as delete_id:
+                for ids in delete_id:
+                    ManageStyle.deleted_ids.append(int(ids.strip()))
 
     @staticmethod
     def get_next_id():
@@ -77,6 +86,8 @@ class ManageStyle:
                 if row['Style ID'] == str(style_id_to_delete):
                     deleted = True
                     ManageStyle.deleted_ids.append(int(row['Style ID']))
+
+                    with open("deleted_ids.txt")
                 else:
                     writer.writerow(row)
 
