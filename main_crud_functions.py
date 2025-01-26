@@ -2,7 +2,7 @@
 import os
 import csv
 
-file_path = os.path.abspath("Season_1.csv")
+file_path = os.path.abspath("season_1.csv")
 file_path_deleted_ids = os.path.abspath("deleted_ids.txt")
 
 class ManageStyle:
@@ -24,6 +24,7 @@ class ManageStyle:
         """Laad verwijderde style ids van de file, file_path_deleted_ids"""
         if os.path.exists(file_path_deleted_ids):
             with open(file_path_deleted_ids, mode="r", encoding='utf-8') as delete_id:
+
                 for ids in delete_id:
                     stripped_ids = ids.strip()
                     if stripped_ids:
